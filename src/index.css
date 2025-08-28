@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-slide {
+  display: inline-flex;
+  min-width: 100%;
+  animation: marquee 20s linear infinite;
+}
+body {
+ font-family: "TASA Explorer", sans-serif;
+}
+
+@keyframes blink-yellow {
+  0%, 100% { color: white; }
+  50% { color: #f4b400; } /* yellow */
+}
+
+.blink-yellow {
+  animation: blink-yellow 1s infinite;
+}
