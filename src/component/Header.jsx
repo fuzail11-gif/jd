@@ -1,32 +1,33 @@
 import React, { useState, useRef } from "react";
 import { Menu, X, User } from "lucide-react";
+import { Link } from "react-router-dom";
 import imgs from "../../public/img1.png";
 import SlidingBanner from "./SlidingBanner";
 
 const MENU_ITEMS = [
-  { label: "Home", link: "#" },
-  { label: "About Us", link: "#" },
-  { label: "Academics", link: "#" },
-  { label: "Administration", link: "#" },
+  { label: "Home", link: "/" },
+  { label: "About Us", link: "/about" },
+  { label: "Academics", link: "/academics" },
+  { label: "Administration", link: "/administration" },
   {
     label: "Campus Life",
     submenu: [
-      { label: "Campus", link: "#" },
-      { label: "Faculty", link: "#" },
-      { label: "Activities", link: "#" },
+      { label: "Campus", link: "/campus" },
+      { label: "Faculty", link: "/faculty" },
+      { label: "Activities", link: "/activities" },
     ],
   },
-  { label: "Fee Structure", link: "#" },
+  { label: "Fee Structure", link: "/fee-structure" },
   {
     label: "Competitive Exam",
     submenu: [
-      { label: "UPSC", link: "#" },
-      { label: "TNPSC", link: "#" },
-      { label: "SSC", link: "#" },
-      { label: "RRB", link: "#" },
+      { label: "UPSC", link: "/upsc" },
+      { label: "TNPSC", link: "/tnpsc" },
+      { label: "SSC", link: "/ssc" },
+      { label: "RRB", link: "/rrb" },
     ],
   },
-  { label: "Online Application", link: "#", external: true },
+  { label: "Online Application", link: "/online-application", external: true },
 ];
 
 const Header = () => {
@@ -47,11 +48,9 @@ const Header = () => {
 
   return (
     <>
-      {/* Fixed Header */}
       <header className="fixed top-0 left-0 w-full bg-[#0f398f] text-white shadow-md z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
             {/* Logo */}
             <div className="text-2xl font-bold text-[#f4b400] ml-0">
               <img src={imgs} alt="Logo" className="w-12 h-12" />
@@ -72,39 +71,62 @@ const Header = () => {
                     </button>
                     {openDropdown === item.label && (
                       <div className="absolute left-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-lg py-2 z-50">
-                        {item.submenu.map((sub) => (
-                          <a
-                            key={sub.label}
-                            href={sub.link}
-                            className="block px-4 py-2 hover:bg-[#0f398f] hover:text-white transition"
-                          >
-                            {sub.label}
-                          </a>
-                        ))}
+                        {item.submenu.map((sub) =>
+                          sub.external ? (
+                            <a
+                              key={sub.label}
+                              href={sub.link}
+                              className="block px-4 py-2 hover:bg-[#0f398f] hover:text-white transition"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {sub.label}
+                            </a>
+                          ) : (
+                            <Link
+                              key={sub.label}
+                              to={sub.link}
+                              className="block px-4 py-2 hover:bg-[#0f398f] hover:text-white transition"
+                            >
+                              {sub.label}
+                            </Link>
+                          )
+                        )}
                       </div>
                     )}
                   </div>
+                ) : item.external ? (
+                  <a
+                    key={item.label}
+                    href={item.link}
+                    className="blink-yellow font-semibold transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.label}
+                  </a>
                 ) : (
-                 <a
-  key={item.label}
-  href={item.link}
-  target={item.external ? "_blank" : "_self"}
-  className={`transition-colors ${
-    item.label === "Online Application" ? "blink-yellow font-semibold" : "hover:text-[#f4b400]"
-  }`}
->
-  {item.label}
-</a>
+                  <Link
+                    key={item.label}
+                    to={item.link}
+                    className={`transition-colors ${
+                      item.label === "Online Application"
+                        ? "blink-yellow font-semibold"
+                        : "hover:text-[#f4b400]"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
                 )
               )}
 
               {/* Student Login */}
-              <a
-                href="#"
+              <Link
+                to="/admin"
                 className="flex items-center gap-2 bg-[#f4b400] text-[#0f398f] px-3 py-1.5 rounded-lg font-semibold hover:bg-white hover:text-[#0f398f] transition"
               >
                 <User size={18} /> Student Login
-              </a>
+              </Link>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -129,42 +151,65 @@ const Header = () => {
                     {item.label}
                   </summary>
                   <div className="ml-4 mt-2 space-y-1">
-                    {item.submenu.map((sub) => (
-                      <a
-                        key={sub.label}
-                        href={sub.link}
-                        className="block hover:text-[#f4b400]"
-                      >
-                        {sub.label}
-                      </a>
-                    ))}
+                    {item.submenu.map((sub) =>
+                      sub.external ? (
+                        <a
+                          key={sub.label}
+                          href={sub.link}
+                          className="block hover:text-[#f4b400]"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {sub.label}
+                        </a>
+                      ) : (
+                        <Link
+                          key={sub.label}
+                          to={sub.link}
+                          className="block hover:text-[#f4b400]"
+                        >
+                          {sub.label}
+                        </Link>
+                      )
+                    )}
                   </div>
                 </details>
+              ) : item.external ? (
+                <a
+                  key={item.label}
+                  href={item.link}
+                  className="block blink-yellow font-semibold"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.label}
+                </a>
               ) : (
-              <a
-  key={item.label}
-  href={item.link}
-  target={item.external ? "_blank" : "_self"}
-  className={`block ${
-    item.label === "Online Application" ? "blink-yellow font-semibold" : "hover:text-[#f4b400]"
-  }`}
->
-  {item.label}
-</a>
-
+                <Link
+                  key={item.label}
+                  to={item.link}
+                  className={`block ${
+                    item.label === "Online Application"
+                      ? "blink-yellow font-semibold"
+                      : "hover:text-[#f4b400]"
+                  }`}
+                >
+                  {item.label}
+                </Link>
               )
             )}
 
             {/* Mobile Student Login */}
-            <a
-              href="#"
+            <Link
+             to="/admin"
               className="flex items-center gap-2 bg-[#f4b400] text-[#0f398f] px-3 py-2 rounded-lg font-semibold hover:bg-white hover:text-[#0f398f] transition mt-2"
             >
               <User size={18} /> Student Login
-            </a>
+            </Link>
           </div>
         )}
       </header>
+
       {/* Add top padding so content isn't hidden */}
       <div className="pt-16">
         <SlidingBanner />
