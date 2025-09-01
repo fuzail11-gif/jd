@@ -7,17 +7,17 @@ import SlidingBanner from "./SlidingBanner";
 const MENU_ITEMS = [
   { label: "Home", link: "/" },
   { label: "About Us", link: "/about" },
-  { label: "Academics", link: "/academics" },
-  { label: "Administration", link: "/administration" },
+  { label: "Academics", link: "/upsc" },
+  { label: "Administration", link: "/upsc" },
   {
     label: "Campus Life",
     submenu: [
-      { label: "Campus", link: "/campus" },
-      { label: "Faculty", link: "/faculty" },
-      { label: "Activities", link: "/activities" },
+      { label: "Campus", link: "/upsc" },
+      { label: "Faculty", link: "/upsc" },
+      { label: "Activities", link: "/upsc" },
     ],
   },
-  { label: "Fee Structure", link: "/fee-structure" },
+  { label: "Fee Structure", link: "/upsc" },
   {
     label: "Competitive Exam",
     submenu: [

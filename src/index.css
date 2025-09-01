@@ -1,4 +1,7 @@
 @import "tailwindcss";
+/* slick-carousel default styles */
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
 
 @keyframes marquee {
   0% { transform: translateX(100%); }
